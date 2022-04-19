@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  jupyter:
+    image: jupyter/tensorflow-notebook
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN?err}
+    working_dir: /home/jovyan/work
+    ports:
+      - 8889:8888
+    volumes:
+      - "work:/home/jovyan/work"
+      - "${DATA_VOLUME:-data}:/home/jovyan/work/data:ro"
+volumes:
+  work:
+    external: false
+  data:
+    external: false
